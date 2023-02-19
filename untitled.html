@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Algebraic Quadratic Equation Solver</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  </head>
+  <body>
+    <h1>Algebraic Quadratic Equation Solver</h1>
+    <form id="equation-form">
+      <div class="form-group">
+        <label for="a">Enter the coefficient of x²:</label>
+        <input type="text" class="form-control" id="a">
+      </div>
+      <div class="form-group">
+        <label for="b">Enter the coefficient of x:</label>
+        <input type="text" class="form-control" id="b">
+      </div>
+      <div class="form-group">
+        <label for="c">Enter the constant:</label>
+        <input type="text" class="form-control" id="c">
+      </div>
+      <button type="submit" class="btn btn-primary">Solve</button>
+    </form>
+    <div id="solution"></div>
+    <div class = "credit" style="color:blue"
+href="https://www.ripondoley.ga">
+<h3>By Ripon Doley </h3> 
+</div>
+    <script>
+      $(document).ready(function() {
+        $("#equation-form").submit(function(event) {
+          event.preventDefault();
+          var a = parseFloat($("#a").val());
+          var b = parseFloat($("#b").val());
+          var c = parseFloat($("#c").val());
+          var x1, x2, x3;
+          var discriminant, realPart, imaginaryPart;
+          var error = false;
+
+          // Check for empty inputs
+          if (isNaN(a) || isNaN(b) || isNaN(c)) {
+            $("#solution").html("<p class='text-danger'>Error: Please enter a valid number for all inputs.</p>");
+            error = true;
+          }
+
+          if (!error) {
+            // Solve linear equation
+            if (a == 0) {
+              if (b == 0) {
+                $("#solution").html("<p class='text-danger'>Error: The equation has no solution.</p>");
+              } else {
+                x1 = -c / b;
+                $("#solution").html("<p>x = " + x1 + "</p>");
+              }
+            }
+
+            // Solve quadratic equation
+            else if (b == 0 && c == 0) {
+              x1 = 0;
+              $("#solution").html("<p>x = " + x1 + "</p>");
+            } else if (b == 0 && c != 0) {
+              if (-c / a >= 0) {
+                x1 = Math.sqrt(-c / a);
+                x2 = -Math.sqrt(-c / a);
+                $("#solution").html("<p>x = " + x1 + " or x = " + x2 + "</p>");
+              } else {
+                x1 = Math.sqrt(-c / a) + "i";
+                x2 = -Math.sqrt(-c / a) + "i";
+                $("#solution").html("<p>x = " + x1 + " or x = " + x2 + "</p>");
+              }
+            } else {
+              discriminant = b * b - 4 * a * c;
+              if (discriminant > 0) {
+                x1 = (-b + Math.sqrt(discriminant)) / (2 * a);
+                x2 = (-b - Math.sqrt(discriminant)) / (2 * a);
+                $("#solution").html("<p>x = " + x1 + " or x = " + x2 + "</p>");
+              } else if (discriminant == 0) {
+                x1 = -b / (2 * a);
+            $("#solution").html("<p>x = " + x1 + "</p>");
+          } else {
+            realPart = -b / (2 * a);
+            imaginaryPart = Math.sqrt(-discriminant) / (2 * a);
+            x1 = realPart + " + " + imaginaryPart + "i";
+            x2 = realPart + " - " + imaginaryPart + "i";
+            $("#solution").html("<p>x = " + x1 + " or x = " + x2 + "</p>");
+          }
+        }
+      }
+    });
+  });
+</script>
+</body>
+</html>
