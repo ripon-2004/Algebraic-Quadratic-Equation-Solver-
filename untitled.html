@@ -1,0 +1,72 @@
+<html>
+  <head>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap');
+
+      .container {
+        position: relative;
+        height: 100vh;
+        background-color: #F0F0F0;
+      }
+
+      .video-background {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+        object-fit: cover;
+      }
+
+      .message {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: rgba(255, 255, 255, 0.7);
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px gray;
+        text-align: center;
+        font-family: 'Great Vibes', cursive;
+      }
+
+      h1 {
+        font-size: 36px;
+        margin-bottom: 20px;
+      }
+
+      p {
+        font-size: 18px;
+        margin-bottom: 20px;
+        overflow: hidden;
+        white-space: nowrap;
+        width: 80%;
+        animation: type 4s steps(60, end);
+      }
+
+      @keyframes type {
+        from { width: 0; }
+      }
+
+      .emoji {
+        font-size: 36px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <video class="video-background" autoplay loop>
+        <source src="https://www.sample-videos.com/video123/mp4/720/big_buck_bunny_720p_1mb.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+      <div class="message">
+        <h1>Good Luck with Your Exam!</h1>
+        <p>I hope this message finds you in good health & spirits. As you gear up for your upcoming exam, I just want to take a moment to wish you all the best.</p>
+        <p>Take care of yourself both physically and mentally. Stay calm and trust in your abilities. I have complete faith in you & your ability to succeed. Sending you lots of positivity & good vibes for you & for your exam.</p>
+        <p>Wishing you all the best. May your hard work & dedication shine through & bring you the success you deserve. <span class="emoji">💖🤞💪</span></p>
+      </div>
+    </div>
+  </body>
+</html>
