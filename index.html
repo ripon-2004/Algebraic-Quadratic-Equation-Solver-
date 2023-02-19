@@ -3,91 +3,95 @@
   <head>
     <title>Algebraic Quadratic Equation Solver</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <link href="https://unpkg.com/tailwindcss@2.2.14/dist/tailwind.min.css" rel="stylesheet">
   </head>
-  <body>
-    <h1>Algebraic Quadratic Equation Solver</h1>
-    <form id="equation-form">
-      <div class="form-group">
-        <label for="a">Enter the coefficient of x²:</label>
-        <input type="text" class="form-control" id="a">
+  <body class="bg-gray-200 py-4">
+    <div class="container mx-auto px-4">
+      <h1 class="text-2xl font-bold mb-4">Algebraic Quadratic Equation Solver</h1>
+      <form id="equation-form" class="mb-4">
+        <div class="mb-4">
+          <label class="block text-gray-700 font-bold mb-2" for="a">Enter the coefficient of x²:</label>
+          <input type="text" class="border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="a" required>
+        </div>
+        <div class="mb-4">
+          <label class="block text-gray-700 font-bold mb-2" for="b">Enter the coefficient of x:</label>
+          <input type="text" class="border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="b" required>
+        </div>
+        <div class="mb-4">
+          <label class="block text-gray-700 font-bold mb-2" for="c">Enter the constant:</label>
+          <input type="text" class="border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="c" required>
+        </div>
+        <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Solve</button>
+      </form>
+      <div id="solution"></div>
+      <div class="credit mt-4">
+        <h3 class="text-blue-500">By Ripon Doley</h3> 
+        <a href="http://www.ripondoley.ga" target="_blank" rel="noopener" class="text-blue-500">www.ripondoley.ga</a>
       </div>
-      <div class="form-group">
-        <label for="b">Enter the coefficient of x:</label>
-        <input type="text" class="form-control" id="b">
-      </div>
-      <div class="form-group">
-        <label for="c">Enter the constant:</label>
-        <input type="text" class="form-control" id="c">
-      </div>
-      <button type="submit" class="btn btn-primary">Solve</button>
-    </form>
-    <div id="solution"></div>
-    <div class = "credit" style="color:blue"
-<a href ="https://www.ripondoley.ga/" target="_blank"data-ripon_doley-credit <style="color: #000"></a>
-</div>
-</div>
+
     <script>
-      $(document).ready(function() {
-        $("#equation-form").submit(function(event) {
-          event.preventDefault();
-          var a = parseFloat($("#a").val());
-          var b = parseFloat($("#b").val());
-          var c = parseFloat($("#c").val());
-          var x1, x2, x3;
-          var discriminant, realPart, imaginaryPart;
-          var error = false;
+$(document).ready(function() {
+  $("#equation-form").submit(function(event) {
+    event.preventDefault();
+    var a = parseFloat($("#a").val());
+    var b = parseFloat($("#b").val());
+    var c = parseFloat($("#c").val());
+    var x1, x2, x3;
+    var discriminant, realPart, imaginaryPart;
+    var error = false;
 
-          // Check for empty inputs
-          if (isNaN(a) || isNaN(b) || isNaN(c)) {
-            $("#solution").html("<p class='text-danger'>Error: Please enter a valid number for all inputs.</p>");
-            error = true;
-          }
+    // Check for empty inputs
+    if (isNaN(a) || isNaN(b) || isNaN(c)) {
+      $("#solution").html("<p class='text-danger'>Error: Please enter a valid number for all inputs.</p>");
+      error = true;
+    }
 
-          if (!error) {
-            // Solve linear equation
-            if (a == 0) {
-              if (b == 0) {
-                $("#solution").html("<p class='text-danger'>Error: The equation has no solution.</p>");
-              } else {
-                x1 = -c / b;
-                $("#solution").html("<p>x = " + x1 + "</p>");
-              }
-            }
-
-            // Solve quadratic equation
-            else if (b == 0 && c == 0) {
-              x1 = 0;
-              $("#solution").html("<p>x = " + x1 + "</p>");
-            } else if (b == 0 && c != 0) {
-              if (-c / a >= 0) {
-                x1 = Math.sqrt(-c / a);
-                x2 = -Math.sqrt(-c / a);
-                $("#solution").html("<p>x = " + x1 + " or x = " + x2 + "</p>");
-              } else {
-                x1 = Math.sqrt(-c / a) + "i";
-                x2 = -Math.sqrt(-c / a) + "i";
-                $("#solution").html("<p>x = " + x1 + " or x = " + x2 + "</p>");
-              }
-            } else {
-              discriminant = b * b - 4 * a * c;
-              if (discriminant > 0) {
-                x1 = (-b + Math.sqrt(discriminant)) / (2 * a);
-                x2 = (-b - Math.sqrt(discriminant)) / (2 * a);
-                $("#solution").html("<p>x = " + x1 + " or x = " + x2 + "</p>");
-              } else if (discriminant == 0) {
-                x1 = -b / (2 * a);
-            $("#solution").html("<p>x = " + x1 + "</p>");
-          } else {
-            realPart = -b / (2 * a);
-            imaginaryPart = Math.sqrt(-discriminant) / (2 * a);
-            x1 = realPart + " + " + imaginaryPart + "i";
-            x2 = realPart + " - " + imaginaryPart + "i";
-            $("#solution").html("<p>x = " + x1 + " or x = " + x2 + "</p>");
-          }
+    if (!error) {
+      // Solve linear equation
+      if (a == 0) {
+        if (b == 0) {
+          $("#solution").html("<p class='text-danger'>Error: The equation has no solution.</p>");
+        } else {
+          x1 = -c / b;
+          $("#solution").html("<p class='text-success'>x = " + x1 + "</p>");
         }
       }
-    });
+
+      // Solve quadratic equation
+      else if (b == 0 && c == 0) {
+        x1 = 0;
+        $("#solution").html("<p class='text-success'>x = " + x1 + "</p>");
+      } else if (b == 0 && c != 0) {
+        if (-c / a >= 0) {
+          x1 = Math.sqrt(-c / a);
+          x2 = -Math.sqrt(-c / a);
+          $("#solution").html("<p class='text-success'>x = " + x1 + " or x = " + x2 + "</p>");
+        } else {
+          x1 = Math.sqrt(-c / a) + "i";
+          x2 = -Math.sqrt(-c / a) + "i";
+          $("#solution").html("<p class='text-success'>x = " + x1 + " or x = " + x2 + "</p>");
+        }
+      } else {
+        discriminant = b * b - 4 * a * c;
+        if (discriminant > 0) {
+          x1 = (-b + Math.sqrt(discriminant)) / (2 * a);
+          x2 = (-b - Math.sqrt(discriminant)) / (2 * a);
+          $("#solution").html("<p class='text-success'>x = " + x1 + " or x = " + x2 + "</p>");
+        } else if (discriminant == 0) {
+          x1 = -b / (2 * a);
+          $("#solution").html("<p class='text-success'>x = " + x1 + "</p>");
+        } else {
+          realPart = -b / (2 * a);
+          imaginaryPart = Math.sqrt(-discriminant) / (2 * a);
+          x1 = realPart + " + " + imaginaryPart + "i";
+          x2 = realPart + " - " + imaginaryPart + "i";
+          $("#solution").html("<p class='text-success'>x = " + x1 + " or x = " + x2 + "</p>");
+        }
+      }
+    }
   });
-</script>
+});
+
+    </script>
 </body>
 </html>
